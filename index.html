@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thread of Hope</title>
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <div class="logo">thread of hope</div>
+
+    <div class="btn-navbar">
+        <span class="indicator"></span>
+        <a href="index.html" class="nav-btn">Beranda</a>
+        <a href="tentang.html" class="nav-btn">Tentang</a>
+        <a href="ebook.html" class="nav-btn">E-Book</a>
+        <a href="galeri.html" class="nav-btn">Galeri</a>
+    </div>
+
+    <button class="hamburger-btn" id="hamburger-btn" aria-label="Buka Menu">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+  </div>
+
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="index.html" class="mobile-nav-link">Beranda</a>
+    <a href="tentang.html" class="mobile-nav-link">Tentang</a>
+    <a href="ebook.html" class="mobile-nav-link">E-Book</a>
+    <a href="galeri.html" class="mobile-nav-link">Galeri</a>
+  </div>
+</nav>
+
+<section class="hero-section">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-header">
+        <h1 class="hero-title">
+          <span class="highlight">CERITA KAMU</span>
+          <img src="images/payung-geulis.png" alt="Payung Geulis" class="hero-icon">
+        </h1>
+        <h2 class="hero-subtitle">SUARA YANG BERARTI</h2>
+      </div>
+      <p class="hero-description">
+        Berbagi adalah langkah kecil menuju pemulihan.
+        Sampaikan ceritamu, biarkan orang lain terinspirasi,
+        dan mari bersama-sama membangun ruang yang sehat untuk mental kita.
+      </p>
+      <a href="#form-cerita" class="btn-hero">Tulis Cerita</a>
+    </div>
+    <div class="hero-image">
+  <img src="images/foto-landing-page.png" alt="Foto Landing Page">
+    </div>
+  </div>
+</section>
+
+<section class="apa-yang-kami-tawarkan">
+  <div class="container">
+    <div class="apa-yang-kami">Apa yang kami tawarkan?</div>
+    <div class="frame-parent">
+      <div class="deskripsi-wrapper">
+        <div class="deskripsi">
+          Platform ini hadir untuk menjadi ruang aman, tempat berbagi cerita,
+          menemukan inspirasi dari pengalaman orang lain, serta membangun komunitas
+          yang saling peduli melalui cerita dan momen kebersamaan.
+        </div>
+      </div>
+      <div class="poin-container">
+        <div class="poin">
+          <b>Untuk Kamu <br> yang Ingin Berbagi</b>
+          <p>Tuliskan ceritamu dan ungkapkan perasaanmu dengan aman.</p>
+        </div>
+        <div class="poin">
+          <b>Untuk Kamu <br> yang Ingin Membaca</b>
+          <p>Temukan kisah inspiratif dari orang lain untuk menambah semangat.</p>
+        </div>
+        <div class="poin">
+          <b>Untuk Dukungan Komunitas</b>
+          <p>Bersama-sama kita ciptakan ruang sehat penuh empati.</p>
+        </div>
+        <div class="poin">
+          <b>Untuk Kegiatan &amp; Momen</b>
+          <p>Lihat dokumentasi kegiatan dan momen kebersamaan yang sudah kami lakukan.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="share-story-section">
+  <div class="container">
+    <div class="share-story-header">
+      <h2 class="share-story-title">Bagikan Cerita Mu</h2>
+      <p class="share-story-subtitle">
+        Bercerita bukan berarti kamu lemah, tapi tanda kamu belum menyerah
+      </p>
+    </div>
+    <form class="share-story-form" action="/submit-cerita" method="POST">
+      <div class="form-row">
+        <input type="text" name="nama" placeholder="Nama" class="form-input" required>
+        <input type="number" name="usia" placeholder="Usia" class="form-input" required>
+      </div>
+      <input type="text" name="harapan" placeholder="Harapan" class="form-input full-width" required>
+      <textarea name="cerita" placeholder="Mari ceritakan..." class="form-input full-width textarea" required></textarea>
+      <div class="form-checkbox">
+        <input type="checkbox" id="setuju" name="setuju" required>
+        <label for="setuju">Saya menyetujui cerita saya dapat diposting oleh admin di landing page</label>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn-submit">Kirim</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section class="message-section">
+  <div class="container">
+    <div class="message-header">
+      <h2 class="message-title">Pesan</h2>
+      <p class="message-subtitle">
+        Bercerita bukan berarti kamu lemah, tapi tanda kamu belum menyerah
+      </p>
+    </div>
+    <div class="message-card">
+      <div class="message-user">
+  <img src="images/icon-profile.png" alt="Profile" class="message-avatar">
+        <div class="message-user-info">
+          <span class="message-username">Nama Pengguna</span>
+          <span class="message-age">Umur 20</span>
+        </div>
+      </div>
+      <p class="message-text">
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
+        ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-top">
+    <div class="container">
+      <div class="footer-col">
+        <h4 class="footer-heading">Useful Links</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="tentang.html">Tentang</a></li>
+          <li><a href="galeri.html">Galeri</a></li>
+          <li><a href="kontak.html">Kontak</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <ul class="footer-contact">
+          <li>+62 123456798</li>
+          <li>email@gmail.com</li>
+        </ul>
+        <div class="footer-socials">
+          <a href="#"><img src="images/icon-whatsapp.png" alt="social"></a>
+          <a href="#"><img src="images/icon-tele.png" alt="social"></a>
+        </div>
+      </div>
+      <div class="footer-col footer-right">
+        <a href="#" class="btn-footer">Gabung Bersama Kami</a>
+        <p class="footer-address">Tasikmalaya, West Java, Indonesia</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      <p>© 2025 — Copyright</p>
+      <a href="#">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+
+<div class="quote-fab-container">
+  <div class="quote-fab-text">
+    spesial letter menunggu mu<br>ayo buka!
+  </div>
+  <button class="quote-fab" id="quote-fab" aria-label="Buka Surat Motivasi">
+  <img src="images/envelope-solid-full.svg" alt="Ikon Surat"> </button>
+</div>
+
+<div class="quote-modal-overlay" id="quote-modal">
+  <div class="quote-modal-content">
+    <button class="close-modal-btn" id="close-modal-btn" aria-label="Tutup">&times;</button>
+    <div class="quote-slider-wrapper">
+      <div class="quote-slider">
+        </div>
+      <button class="quote-nav-btn" id="prev-quote-btn" aria-label="Sebelumnya">←</button>
+      <button class="quote-nav-btn" id="next-quote-btn" aria-label="Berikutnya">→</button>
+    </div>
+  </div>
+</div>
+
+<script src="quotes.js"></script>
+
+</body>
+</html>

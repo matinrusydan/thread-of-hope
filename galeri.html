@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thread of Hope - Galeri</title>
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/galeri.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <div class="logo">thread of hope</div>
+
+    <div class="btn-navbar">
+        <span class="indicator"></span>
+        <a href="index.html" class="nav-btn">Beranda</a>
+        <a href="tentang.html" class="nav-btn">Tentang</a>
+        <a href="ebook.html" class="nav-btn">E-Book</a>
+        <a href="galeri.html" class="nav-btn">Galeri</a>
+    </div>
+
+    <button class="hamburger-btn" id="hamburger-btn" aria-label="Buka Menu">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+  </div>
+
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="index.html" class="mobile-nav-link">Beranda</a>
+    <a href="tentang.html" class="mobile-nav-link">Tentang</a>
+    <a href="ebook.html" class="mobile-nav-link">E-Book</a>
+    <a href="galeri.html" class="mobile-nav-link">Galeri</a>
+  </div>
+</nav>
+
+<main>
+  <section class="gallery-section">
+    <div class="container">
+      <div class="gallery-header">
+        <h2 class="gallery-title">Galeri Kegiatan</h2>
+        <p class="gallery-subtitle">Momen kebersamaan yang telah kami lalui untuk merajut harapan.</p>
+      </div>
+      <div class="photo-grid">
+        <div class="photo-card">
+          <img src="images/kegiatan-kemanusiaan-mental-health-2.jpg" alt="Kegiatan Kemanusiaan">
+          <div class="photo-caption">Workshop Kesehatan Mental</div>
+        </div>
+        <div class="photo-card">
+          <img src="images/foto-landing-page.png" alt="Kegiatan lain">
+          <div class="photo-caption">Seminar Inspiratif</div>
+        </div>
+        <div class="photo-card">
+          <img src="images/kegiatan-kemanusiaan-mental-health-2.jpg" alt="Kegiatan lainnya">
+          <div class="photo-caption">Grup Diskusi Remaja</div>
+        </div>
+         <div class="photo-card">
+          <img src="images/foto-landing-page.png" alt="Kegiatan lain">
+          <div class="photo-caption">Sesi Berbagi Cerita</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="calendar-section">
+    <div class="container">
+      <div class="calendar-header-main">
+        <h2 class="calendar-title-main">Kalender Event</h2>
+        <p class="calendar-subtitle-main">Ikuti kegiatan kami yang akan datang dan jadilah bagian dari perubahan.</p>
+      </div>
+
+      <div class="event-calendar-container">
+        <div class="calendar-header">
+          <button id="prev-month-btn" class="calendar-nav-btn">←</button>
+          <h3 class="calendar-month-title">September 2025</h3>
+          <button id="next-month-btn" class="calendar-nav-btn">→</button>
+        </div>
+
+        <div class="calendar-days-of-week">
+          <div>Min</div>
+          <div>Sen</div>
+          <div>Sel</div>
+          <div>Rab</div>
+          <div>Kam</div>
+          <div>Jum</div>
+          <div>Sab</div>
+        </div>
+
+        <div class="calendar-grid">
+          <div class="calendar-day-empty"></div>
+          <div class="calendar-day calendar-day-past">1</div>
+          <div class="calendar-day calendar-day-past">2</div>
+          <div class="calendar-day calendar-day-past">3</div>
+          <div class="calendar-day calendar-day-past">4</div>
+          <div class="calendar-day calendar-day-today">5</div>
+          <div class="calendar-day">6</div>
+          <div class="calendar-day">7</div>
+          <div class="calendar-day">8</div>
+          <div class="calendar-day">9</div>
+          <div class="calendar-day">10</div>
+          <div class="calendar-day calendar-day-event">
+            11
+            <span class="event-dot"></span>
+            <div class="event-tooltip">Workshop: Mengenal Diri Sendiri</div>
+          </div>
+          <div class="calendar-day">12</div>
+          <div class="calendar-day">13</div>
+          <div class="calendar-day">14</div>
+          <div class="calendar-day">15</div>
+          <div class="calendar-day">16</div>
+          <div class="calendar-day">17</div>
+          <div class="calendar-day">18</div>
+          <div class="calendar-day">19</div>
+          <div class="calendar-day">20</div>
+          <div class="calendar-day">21</div>
+          <div class="calendar-day">22</div>
+          <div class="calendar-day">23</div>
+          <div class="calendar-day">24</div>
+          <div class="calendar-day calendar-day-event">
+            25
+            <span class="event-dot"></span>
+            <div class="event-tooltip">Seminar: Berdamai dengan Cemas</div>
+          </div>
+          <div class="calendar-day">26</div>
+          <div class="calendar-day">27</div>
+          <div class="calendar-day">28</div>
+          <div class="calendar-day">29</div>
+          <div class="calendar-day">30</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+
+<footer class="footer">
+  <div class="footer-top">
+    <div class="container">
+      <div class="footer-col">
+        <h4 class="footer-heading">Useful Links</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="tentang.html">Tentang</a></li>
+          <li><a href="galeri.html">Galeri</a></li>
+          <li><a href="kontak.html">Kontak</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <ul class="footer-contact">
+          <li>+62 123456798</li>
+          <li>email@gmail.com</li>
+        </ul>
+        <div class="footer-socials">
+          <a href="#"><img src="images/icon-whatsapp.png" alt="social"></a>
+          <a href="#"><img src="images/icon-tele.png" alt="social"></a>
+        </div>
+      </div>
+      <div class="footer-col footer-right">
+        <a href="#" class="btn-footer">Gabung Bersama Kami</a>
+        <p class="footer-address">Tasikmalaya, West Java, Indonesia</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      <p>© 2025 — Copyright</p>
+      <a href="#">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+
+<div class="quote-fab-container">
+  <div class="quote-fab-text">
+    spesial letter menunggu mu<br>ayo buka!
+  </div>
+  <button class="quote-fab" id="quote-fab" aria-label="Buka Surat Motivasi">
+  <img src="images/envelope-solid-full.svg" alt="Ikon Surat"> </button>
+</div>
+
+<div class="quote-modal-overlay" id="quote-modal">
+  <div class="quote-modal-content">
+    <button class="close-modal-btn" id="close-modal-btn" aria-label="Tutup">&times;</button>
+    <div class="quote-slider-wrapper">
+      <div class="quote-slider">
+        </div>
+      <button class="quote-nav-btn" id="prev-quote-btn" aria-label="Sebelumnya">←</button>
+      <button class="quote-nav-btn" id="next-quote-btn" aria-label="Berikutnya">→</button>
+    </div>
+  </div>
+</div>
+
+<script src="quotes.js"></script>
+</body>
+</html>

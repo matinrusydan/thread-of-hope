@@ -1,0 +1,337 @@
+/* Hero Section */
+.hero-section {
+margin-top: 60px;
+}
+.hero-section .container {
+display: flex;
+justify-content: space-between;
+align-items: center;
+gap: 40px;
+}
+
+.hero-content {
+max-width: 600px;
+display: flex;
+flex-direction: column;
+gap: 20px;
+font-family: "Poppins", sans-serif;
+color: #000;
+}
+
+.hero-header {
+display: flex;
+flex-direction: column;
+gap: 10px;
+}
+
+.hero-title {
+display: flex;
+align-items: flex-end;
+gap: 10px;
+font-size: 54px;
+font-weight: 700;
+margin: 0;
+}
+
+.hero-title .highlight {
+font-weight: 700;
+}
+
+.hero-icon {
+width: 160px;
+height: auto;
+}
+
+.hero-subtitle {
+font-size: 48px;
+font-weight: 600;
+margin: 0;
+}
+
+.hero-description {
+font-size: 20px;
+line-height: 1.6;
+text-align: justify;
+color: rgba(0,0,0,0.8);
+}
+
+.btn-hero {
+display: inline-block;
+padding: 12px 24px;
+background: #f9b827;
+border-radius: 39px;
+font-size: 18px;
+font-weight: 500;
+color: #000;
+text-decoration: none;
+transition: background 0.3s ease;
+width: fit-content;
+}
+
+.btn-hero:hover {
+background: #e6a81f;
+}
+
+.hero-image img {
+width: 600px;
+max-width: 100%;
+height: auto;
+object-fit: cover;
+border-radius: 10px;
+}
+
+/* Offer Section */
+.apa-yang-kami-tawarkan {
+margin-top: 100px;
+}
+
+.apa-yang-kami-tawarkan .container {
+display: flex;
+flex-direction: column;
+gap: 30px;
+}
+
+.apa-yang-kami {
+font-size: 20px;
+font-weight: 500;
+text-align: left;
+width: 100%;
+}
+
+.frame-parent {
+border-radius: 30px;
+background-color: #fff;
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+justify-content: space-between;
+padding: 40px;
+gap: 40px;
+box-sizing: border-box;
+width: 100%;
+}
+
+.deskripsi-wrapper {
+max-width: 320px;
+padding: 10px;
+}
+
+.deskripsi {
+font-size: 18px;
+line-height: 1.6;
+font-weight: 400;
+color: #000;
+}
+
+.poin-container {
+flex: 1;
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+gap: 30px;
+}
+
+.poin {
+display: flex;
+flex-direction: column;
+gap: 10px;
+}
+
+.poin b {
+font-size: 20px;
+font-weight: 600;
+color: #000;
+}
+
+.poin p {
+font-size: 16px;
+font-family: "Poppins", sans-serif;
+font-weight: 400;
+line-height: 1.5;
+color: rgba(0, 0, 0, 0.6);
+}
+
+/* Share Story Section */
+.share-story-section {
+margin-top: 100px;
+}
+
+.share-story-section .container {
+display: flex;
+flex-direction: column;
+gap: 30px;
+align-items: center;
+}
+
+.share-story-header {
+width: 100%;
+max-width: 640px;
+margin: 0 auto;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 10px;
+text-align: center;
+}
+
+.share-story-title {
+font-size: 32px;
+font-weight: 600;
+margin: 0 auto;
+text-align: center;
+}
+
+.share-story-subtitle {
+font-size: 18px;
+color: rgba(0, 0, 0, 0.7);
+margin: 0;
+}
+
+.share-story-form {
+width: 100%;
+background: #fff;
+border-radius: 30px;
+padding: 30px 40px;
+display: flex;
+flex-direction: column;
+gap: 27px;
+box-sizing: border-box;
+font-family: "Poppins", sans-serif;
+}
+
+.form-row .form-input {
+flex: 1;
+}
+
+.form-checkbox {
+display: flex;
+align-items: center;
+gap: 10px;
+font-size: 14px;
+font-family: "Poppins", sans-serif;
+text-align: left;
+}
+
+/* Message Section */
+.message-section {
+margin: 40px 0;
+}
+.message-section .container {
+display: flex;
+flex-direction: column;
+gap: 20px;
+font-family: "Poppins", sans-serif;
+}
+
+.message-header {
+text-align: center;
+}
+
+.message-title {
+font-size: 32px;
+font-weight: 600;
+color: #000;
+margin-bottom: 8px;
+}
+
+.message-subtitle {
+font-size: 18px;
+font-weight: 400;
+color: #000;
+margin: 0;
+}
+
+.message-card {
+background: #fff;
+border-radius: 20px;
+border-left: 5px solid #f9b827;
+box-shadow: 0 0 5px rgba(0,0,0,0.2);
+padding: 20px 30px;
+display: flex;
+flex-direction: column;
+gap: 20px;
+}
+
+.message-user {
+display: flex;
+align-items: center;
+gap: 20px;
+}
+
+.message-avatar {
+width: 62px;
+height: 62px;
+border-radius: 50%;
+object-fit: cover;
+}
+
+.message-user-info {
+display: flex;
+flex-direction: column;
+gap: 5px;
+}
+
+.message-username {
+font-size: 20px;
+font-weight: 600;
+color: #000;
+}
+
+.message-age {
+font-size: 18px;
+color: #757575;
+}
+
+.message-text {
+font-size: 18px;
+color: #757575;
+line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+.hero-section .container {
+flex-direction: column;
+text-align: center;
+}
+
+.hero-content {
+align-items: center;
+}
+
+.hero-title {
+justify-content: center;
+}
+}
+
+@media (max-width: 900px) {
+.frame-parent {
+flex-direction: column;
+align-items: flex-start;
+}
+
+.deskripsi-wrapper {
+max-width: 100%;
+}
+
+.poin-container {
+grid-template-columns: 1fr;
+}
+}
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 42px;
+  }
+  .hero-subtitle {
+    font-size: 36px;
+  }
+  .hero-description {
+    font-size: 16px;
+  }
+  .hero-image img {
+    width: 100%;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+}

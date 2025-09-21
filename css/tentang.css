@@ -1,0 +1,232 @@
+/* About Section */
+.about-section {
+    margin-top: 60px;
+}
+
+.about-card {
+  position: relative;
+  border-radius: 30px;
+  overflow: hidden;
+  min-height: 600px;
+}
+
+.about-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.about-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 80px;
+}
+
+.about-content {
+  max-width: 600px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 20px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.about-title {
+  font-size: 42px;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  color: #000;
+  margin: 0;
+}
+
+.about-subtitle {
+  font-size: 18px;
+  font-weight: 400;
+  color: rgba(0,0,0,0.7);
+  margin: 0;
+}
+
+.btn-about {
+  display: inline-block;
+  background: #f9b827;
+  padding: 10px 16px;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #000;
+  text-decoration: none;
+  width: fit-content;
+  transition: background 0.3s ease;
+}
+.btn-about:hover {
+  background: #e6a81f;
+}
+
+/* Description Section */
+.description-section {
+  padding: 60px 0;
+  text-align: center;
+  background-color: #fff;
+  margin-top: 80px;
+}
+
+.description-section .container {
+  max-width: 800px;
+}
+
+.description-text {
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.7;
+  color: #333;
+  font-style: italic;
+}
+
+/* Vision & Mission Section */
+.vision-mission-section {
+  padding: 80px 0;
+}
+
+.vision-mission-section .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 40px;
+}
+
+.vision-mission-header {
+  max-width: 640px;
+}
+
+.vision-mission-title {
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.vision-mission-content {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.vision-card, .mission-card {
+  padding: 30px 40px;
+  border-radius: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  flex: 1;
+  min-width: 300px;
+  max-width: 480px;
+}
+
+.vision-card h3, .mission-card h3 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #000;
+}
+
+.vision-card p {
+  font-size: 18px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.mission-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-align: left;
+}
+
+.mission-card li {
+  font-size: 18px;
+  color: #555;
+  line-height: 1.6;
+  position: relative;
+  padding-left: 30px;
+}
+
+.mission-card li::before {
+  content: '✔';
+  color: #F9B827;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* Join Section */
+.join-section {
+  margin-bottom: 80px;
+}
+.join-section .container {
+    display: flex;
+    justify-content: center;
+}
+
+.join-card {
+  width: 100%;
+  max-width: 1100px;
+  border-radius: 30px;
+  background: #fff;
+  padding: 30px 40px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 27px;
+}
+
+.join-header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.join-title {
+  font-size: 32px;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  margin-bottom: 10px;
+}
+.join-subtitle {
+  font-size: 18px;
+  color: rgba(0, 0, 0, 0.7);
+  margin: 0;
+}
+
+.join-form {
+  display: flex;
+  flex-direction: column;
+  gap: 27px;
+  font-family: "Poppins", sans-serif;
+}
+
+@media (max-width: 768px) {
+  .about-overlay {
+    padding: 0 20px;
+  }
+  .about-content {
+    padding: 20px;
+  }
+  .about-title {
+    font-size: 32px;
+  }
+  .description-text {
+    font-size: 18px;
+  }
+  .vision-mission-content {
+    flex-direction: column;
+  }
+}

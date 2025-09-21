@@ -1,0 +1,851 @@
+/* Reset dasar */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: #E4E0E1;
+}
+
+.container {
+  width: 100%;
+  max-width: 1280px;   /* batas biar gak terlalu lebar */
+  margin: 0 auto;      /* center */
+  padding: 0 80px;     /* konsisten 80px kiri-kanan */
+  box-sizing: border-box;
+}
+
+/* Navbar */
+.navbar {
+  height: 84px;
+  background-color: #E4E0E1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo teks */
+.logo {
+  font-family: "Pristina", "Great Vibes", cursive;
+  font-size: 32px;
+  color: #000;
+  line-height: normal;
+}
+
+/* Container tombol */
+.btn-navbar {
+  position: relative;
+  display: flex;
+  gap: 20px;
+  width: 590px;
+  height: 44px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Indicator highlight */
+.indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 132px;
+  height: 44px;
+  border-radius: 20px;
+  background-color: #F9B827;
+  z-index: 0;
+  transition: transform 0.4s ease;
+}
+
+/* Tombol nav */
+.nav-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 132px;
+  height: 44px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 16px;
+  color: #000;
+  z-index: 1; 
+}
+
+/* Hover tetap halus */
+.nav-btn:hover {
+  background-color: #f9b827;
+}
+
+/* Aktif dengan animasi halus */
+.nav-btn.active {
+  background-color: #f9b827;
+  transition: background-color 0.4s ease;
+}
+
+.hero-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  margin-top: 60px;
+}
+
+/* Kiri */
+.hero-content {
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-family: "Poppins", sans-serif;
+  color: #000;
+}
+
+.hero-header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.hero-title {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  font-size: 54px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.hero-title .highlight {
+  font-weight: 700;
+}
+
+.hero-icon {
+  width: 160px;
+  height: auto;
+}
+
+.hero-subtitle {
+  font-size: 48px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.hero-description {
+  font-size: 20px;
+  line-height: 1.6;
+  text-align: justify;
+  color: rgba(0,0,0,0.8);
+}
+
+/* Tombol */
+.btn-hero {
+  display: inline-block;
+  padding: 12px 24px;
+  background: #f9b827;
+  border-radius: 39px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #000;
+  text-decoration: none;
+  transition: background 0.3s ease;
+  width: fit-content;
+}
+
+.btn-hero:hover {
+  background: #e6a81f;
+}
+
+/* Kanan */
+.hero-image img {
+  width: 600px;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Responsif */
+@media (max-width: 992px) {
+  .hero-section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-content {
+    align-items: center;
+  }
+
+  .hero-title {
+    justify-content: center;
+  }
+}
+
+.apa-yang-kami-tawarkan,
+.share-story-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 100px;
+}
+
+/* Judul */
+.apa-yang-kami {
+  font-size: 20px;
+  font-weight: 500;
+  text-align: left;
+  width: 100%;
+}
+
+/* Kotak putih */
+.frame-parent {
+  border-radius: 30px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 40px;
+  gap: 40px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* Deskripsi kiri */
+.deskripsi-wrapper {
+  max-width: 320px;  /* biar gak terlalu melebar */
+  padding: 10px;
+}
+
+.deskripsi {
+  font-size: 18px;
+  line-height: 1.6;
+  font-weight: 400;
+  color: #000;
+}
+
+/* Container poin kanan */
+.poin-container {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+/* Poin individual */
+.poin {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.poin b {
+  font-size: 20px;
+  font-weight: 600;
+  color: #000;
+}
+
+.poin p {
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+/* Responsif */
+@media (max-width: 900px) {
+  .frame-parent {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .deskripsi-wrapper {
+    max-width: 100%;
+  }
+
+  .poin-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Section wrapper */
+
+
+/* Header */
+.share-story-header {
+  width: 100%;            /* full width */
+  max-width: 640px;       /* batas maksimal biar nggak kepanjangan */
+  margin: 0 auto;         /* center secara horizontal */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;     /* teks di tengah */
+}
+
+.share-story-title {
+  font-size: 32px;
+  font-weight: 600;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.share-story-subtitle {
+  font-size: 18px;
+  color: rgba(0, 0, 0, 0.7);
+  margin: 0;
+}
+
+/* Form container */
+.share-story-form {
+  width: 100%;
+  max-width: 1280px;
+  background: #fff;
+  border-radius: 30px;
+  padding: 30px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 27px;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Input field reusable */
+.form-input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 16px;
+  font-family: "Poppins", sans-serif; /* font Poppins */
+  border: none;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  outline: none;
+  box-sizing: border-box;
+}
+.form-input::placeholder {
+  font-family: "Poppins", sans-serif; /* placeholder juga Poppins */
+  color: rgba(0,0,0,0.5);
+}
+.textarea {
+  height: 196px;
+  resize: vertical;
+}
+
+/* Nama & Usia (1 row) */
+.form-row {
+  display: flex;
+  gap: 20px;
+}
+.form-row .form-input {
+  flex: 1;
+}
+
+/* Checkbox */
+.form-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif; /* checkbox text */
+  text-align: left;
+}
+
+/* Tombol kirim */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+.btn-submit {
+  width: 182px;
+  padding: 12px;
+  border-radius: 20px;
+  background-color: #f9b827;
+  border: none;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif; /* button text */
+  cursor: pointer;
+  transition: 0.2s;
+}
+.btn-submit:hover {
+  background-color: #e6a81f;
+}
+
+/* Section Pesan */
+.message-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Header */
+.message-header {
+  text-align: center;
+}
+
+.message-title {
+  font-size: 32px;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 8px;
+}
+
+.message-subtitle {
+  font-size: 18px;
+  font-weight: 400;
+  color: #000;
+  margin: 0;
+}
+
+/* Card */
+.message-card {
+  background: #fff;
+  border-radius: 20px;
+  border-left: 5px solid #f9b827;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* User info */
+.message-user {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.message-avatar {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.message-user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.message-username {
+  font-size: 20px;
+  font-weight: 600;
+  color: #000;
+}
+
+.message-age {
+  font-size: 18px;
+  color: #757575;
+}
+
+/* Pesan teks */
+.message-text {
+  font-size: 18px;
+  color: #757575;
+  line-height: 1.5;
+}
+
+
+/* Section E-Book */
+.ebook-section {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  font-family: "Poppins", sans-serif;
+  margin-top: 60px;
+}
+
+/* Header */
+.ebook-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.ebook-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 12px;
+}
+
+.ebook-subtitle {
+  font-size: 18px;
+  font-weight: 400;
+  color: rgba(0,0,0,0.8);
+  line-height: 1.6;
+}
+
+/* Card list */
+.ebook-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+/* Card */
+.ebook-card {
+  width: 340px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.15);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.ebook-card:hover {
+  transform: translateY(-6px);
+}
+
+/* Gambar */
+.ebook-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Konten */
+.ebook-content {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ebook-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #000;
+  margin: 0;
+}
+
+.ebook-author {
+  font-size: 14px;
+  color: #757575;
+}
+
+.ebook-link {
+  font-size: 14px;
+  color: #1C3DD9; /* secondary color (biru ikon) */
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Tentang Section */
+.about-card {
+  position: relative;
+  border-radius: 30px;
+  overflow: hidden;
+  min-height: 600px;
+}
+
+/* Gambar latar */
+.about-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Overlay untuk konten */
+.about-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 80px; /* konsisten padding */
+}
+
+/* Kotak putih transparan */
+.about-content {
+  max-width: 600px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 20px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Judul */
+.about-title {
+  font-size: 42px;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  color: #000;
+  margin: 0;
+}
+
+/* Deskripsi */
+.about-subtitle {
+  font-size: 18px;
+  font-weight: 400;
+  color: rgba(0,0,0,0.7);
+  margin: 0;
+}
+
+/* Tombol */
+.btn-about {
+  display: inline-block;
+  background: #f9b827;
+  padding: 10px 16px;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #000;
+  text-decoration: none;
+  width: fit-content;
+  transition: background 0.3s ease;
+}
+.btn-about:hover {
+  background: #e6a81f;
+}
+
+
+/* Footer umum */
+.footer {
+  background: #fff;
+  padding: 64px 0 30px 0;
+  font-family: "Poppins", sans-serif;
+  color: #000;
+}
+
+.footer .container {
+  padding: 0 80px; /* konsisten */
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* Bagian atas */
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+/* Judul kolom */
+.footer-heading {
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.6;
+  margin-bottom: 10px;
+}
+
+/* Link */
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.footer-links li a {
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 400;
+  color: #000;
+  opacity: 0.8;
+  transition: 0.2s;
+}
+.footer-links li a:hover {
+  opacity: 1;
+}
+
+/* Kontak */
+.footer-contact {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+}
+.footer-socials {
+  display: flex;
+  gap: 10px;
+}
+.footer-socials img {
+  width: 20px;
+  height: 20px;
+}
+
+.btn-footer {
+  display: inline-block;
+  background-color: #f9b827;
+  color: #000;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 6px 12px;       /* kecilkan padding supaya rapat dengan teks */
+  border-radius: 20px;
+  transition: background 0.3s ease;
+  width: fit-content;      /* mengikuti panjang teks */
+}
+
+.btn-footer:hover {
+  background-color: #e6a81f;
+}
+
+.footer-col.footer-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;   /* semua konten di kolom kanan rata kanan */
+  gap: 16px;              /* jarak antar elemen */
+}
+
+.footer-col.footer-right .address {
+  text-align: right;
+}
+
+/* Alamat */
+.footer-address {
+  font-size: 14px;
+  opacity: 0.8;
+  text-align: right;
+}
+
+/* Bagian bawah */
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  opacity: 0.5;
+}
+.footer-bottom a {
+  text-decoration: none;
+  color: #000;
+}
+
+
+.j.join-section {
+  /* Padding & lebar kini diatur oleh class .container di HTML, jadi properti di sini bisa dihapus. */
+  margin: 80px 0; /* Spasi atas dan bawah dipertahankan. */
+}
+
+/* Card putih */
+.join-card {
+  width: 100%;
+  max-width: 1100px; /* Ditambahkan agar lebar maksimalnya sama dengan form .share-story-form */
+  margin: 0 auto; /* Menengahkan card di dalam container */
+  border-radius: 30px;
+  background: #fff;
+  padding: 30px 40px; /* Disesuaikan agar konsisten dengan padding .share-story-form */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 27px; /* Disesuaikan agar jarak antar elemen form konsisten */
+}
+
+/* Header */
+.join-header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.join-title {
+  font-size: 32px;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  margin-bottom: 10px;
+}
+.join-subtitle {
+  font-size: 18px;
+  color: rgba(0, 0, 0, 0.7);
+  margin: 0;
+}
+
+/* Form */
+.join-form {
+  display: flex;
+  flex-direction: column;
+  gap: 27px;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Row (2 kolom) */
+.form-row {
+  display: flex;
+  gap: 20px;
+}
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Label */
+.form-group label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #000;
+}
+
+/* Input dan Textarea */
+.form-input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  border: none;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  outline: none;
+  box-sizing: border-box;
+}
+.form-input::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+.textarea {
+  height: 196px; /* Tinggi disamakan dengan textarea di form lain */
+  resize: vertical;
+}
+
+/* Tombol */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+.btn-submit {
+  display: inline-block;
+  background: #f9b827;
+  padding: 12px 24px;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #000;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.btn-submit:hover {
+  background: #e6a81f;
+}
