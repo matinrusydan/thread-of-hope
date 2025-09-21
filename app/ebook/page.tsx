@@ -3,6 +3,9 @@ import Footer from "@/components/footer"
 import EbookGrid from "@/components/ebook-grid"
 import { apiUrl } from "@/lib/api"
 
+// Disable static generation for this page (needs database)
+export const dynamic = 'force-dynamic'
+
 export default async function EbookPage() {
   // Fetch published ebooks from API
   let ebooks = []
@@ -16,6 +19,7 @@ export default async function EbookPage() {
     }
   } catch (error) {
     console.error("Error fetching ebooks:", error)
+    // Continue with empty array
   }
 
   return (

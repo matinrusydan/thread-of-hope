@@ -5,6 +5,9 @@ import dynamic from 'next/dynamic'
 import { apiUrl } from '@/lib/api'
 const Calendar = dynamic(() => import('@/components/calendar'), { ssr: false })
 
+// Disable static generation for this page (needs database)
+export const revalidate = 0
+
 export default async function GaleriPage() {
   // Fetch gallery items from API
   let galleryItems: any[] = []
