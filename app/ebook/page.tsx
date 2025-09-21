@@ -8,7 +8,6 @@ export default async function EbookPage() {
   let ebooks = []
   try {
     const response = await fetch(apiUrl('/api/ebooks?published=true&limit=50'), {
-      cache: 'force-cache',
       next: { revalidate: 3600 } // Revalidate every hour
     })
     if (response.ok) {

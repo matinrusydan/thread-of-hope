@@ -13,7 +13,6 @@ export default async function GaleriPage() {
   try {
     // Fetch gallery items
     const galleryResponse = await fetch(apiUrl('/api/gallery?limit=20'), {
-      cache: 'force-cache',
       next: { revalidate: 300 } // Revalidate every 5 minutes
     })
     if (galleryResponse.ok) {
@@ -23,7 +22,6 @@ export default async function GaleriPage() {
 
     // Fetch events
     const eventsResponse = await fetch(apiUrl('/api/events?limit=100'), {
-      cache: 'force-cache',
       next: { revalidate: 3600 } // Revalidate every hour
     })
     if (eventsResponse.ok) {
