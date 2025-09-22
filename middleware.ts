@@ -37,11 +37,11 @@ export default withAuth(
         }
 
         // Allow access to public pages
-        if (pathname === '/' || pathname.startsWith('/api/') || pathname.startsWith('/_next/')) {
+        if (pathname === '/' || pathname.startsWith('/api/') || pathname.startsWith('/_next/') || !pathname.startsWith('/admin')) {
           return true
         }
 
-        // Require authentication for protected pages
+        // Require authentication only for admin pages
         return !!token
       },
     },

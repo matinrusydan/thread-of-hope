@@ -33,14 +33,5 @@ export default function AuthButton() {
     )
   }
 
-  return (
-    <div className="flex items-center gap-2">
-      <Button onClick={() => router.push("/auth/login")} variant="default" size="sm">
-        Login
-      </Button>
-      <Button onClick={() => router.push("/auth/sign-up")} variant="outline" size="sm">
-        Sign Up
-      </Button>
-    </div>
-  )
+  return null
 }
