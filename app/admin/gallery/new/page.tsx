@@ -1,19 +1,23 @@
-import { getServerSession } from "next-auth/next"
-import { authOptions } from "@/lib/auth"
 import { redirect } from "next/navigation"
 import AdminNavbar from "@/components/admin/admin-navbar"
 import GalleryCreateForm from "@/components/admin/gallery-create-form"
 
+import { cookies } from "next/headers"
+import { prisma } from "@/lib/prisma"
+
 export default async function AdminGalleryCreatePage() {
-  const session = await getServerSession(authOptions)
-
-  if (!session || session.user.role !== 'admin') {
-    redirect("/")
+  const cookieStore = cookies()
+  const adminSession = cookieStore.get("admin_session")?.value
+  if (!adminSession) {
+    redirect("/admin/login")
   }
-
+  const user = await prisma.user.findUnique({ where: { id: adminSession } })
+  if (!user || user.role !== "admin") {
+    redirect("/admin/login")
+  }
   return (
     <div className="min-h-screen bg-background">
-      <AdminNavbar user={session.user} />
+      <AdminNavbar user={user} />
       <GalleryCreateForm />
     </div>
   )

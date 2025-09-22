@@ -60,10 +60,7 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Auth Button */}
-          <div className="hidden md:block">
-            <AuthButton />
-          </div>
+
 
           {/* Mobile menu button */}
           <button onClick={toggleMenu} className="md:hidden p-2 rounded-md text-foreground hover:bg-muted">
@@ -110,9 +107,7 @@ export default function Navbar() {
               >
                 Galeri
               </Link>
-              <div className="px-3 py-2">
-                <AuthButton />
-              </div>
+
             </div>
           </div>
         )}

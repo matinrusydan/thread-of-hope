@@ -1,25 +1,19 @@
-import { getServerSession } from "next-auth/next"
-import { authOptions } from "@/lib/auth"
+import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
+import { prisma } from "@/lib/prisma"
 import { apiUrl } from "@/lib/api"
 import AdminNavbar from "@/components/admin/admin-navbar"
 import GalleryManagement from "@/components/admin/gallery-management"
-import { cookies } from "next/headers"
-import { prisma } from "@/lib/prisma"
 
 export default async function AdminGalleryPage() {
-  const session = await getServerSession(authOptions)
-
-    const cookieStore = cookies()
-    const adminSession = cookieStore.get("admin_session")?.value
-    if (!adminSession) {
-      redirect("/admin/login")
-    }
-
-    // Optionally, fetch user info for navbar
-    const user = await prisma.user.findUnique({ where: { id: adminSession } })
-    if (!user || user.role !== "admin") {
-      redirect("/admin/login")
+  const cookieStore = cookies()
+  const adminSession = cookieStore.get("admin_session")?.value
+  if (!adminSession) {
+    redirect("/admin/login")
+  }
+  const user = await prisma.user.findUnique({ where: { id: adminSession } })
+  if (!user || user.role !== "admin") {
+    redirect("/admin/login")
   }
 
   // Fetch all gallery items from API
@@ -39,7 +33,7 @@ export default async function AdminGalleryPage() {
 
   return (
     <div className="min-h-screen bg-background">
-        <AdminNavbar user={user} />
+      <AdminNavbar user={user} />
       <GalleryManagement initialGalleryItems={galleryItems} />
     </div>
   )
