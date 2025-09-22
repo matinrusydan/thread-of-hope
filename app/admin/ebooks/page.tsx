@@ -1,15 +1,20 @@
-import { getServerSession } from "next-auth/next"
-import { authOptions } from "@/lib/auth"
-import { redirect } from "next/navigation"
+import { prisma } from "@/lib/prisma"
+import { cookies } from "next/headers"
+import { apiUrl } from "@/lib/api"
 import AdminNavbar from "@/components/admin/admin-navbar"
 import EbookManagement from "@/components/admin/ebook-management"
-import { apiUrl } from "@/lib/api"
 
 export default async function AdminEbooksPage() {
-  const session = await getServerSession(authOptions)
+  const cookieStore = cookies()
+  const adminSession = cookieStore.get("admin_session")?.value
+  if (!adminSession) {
+    redirect("/admin/login")
+  }
 
-  if (!session || session.user.role !== 'admin') {
-    redirect("/")
+  // Optionally, fetch user info for navbar
+  const user = await prisma.user.findUnique({ where: { id: adminSession } })
+  if (!user || user.role !== "admin") {
+    redirect("/admin/login")
   }
 
   // Fetch all ebooks from API
@@ -29,7 +34,7 @@ export default async function AdminEbooksPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <AdminNavbar user={session.user} />
+      {user && <AdminNavbar user={user} />}
       <EbookManagement initialEbooks={ebooks} />
     </div>
   )

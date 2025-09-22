@@ -20,7 +20,7 @@ async function createAdmin() {
       where: { email: 'admin@threadofhope.com' },
       update: { role: 'admin' },
       create: {
-        email: 'admin@threadofhope.com',
+        email: 'rikariyani@gmail.com',
         password: hashedPassword,
         name: 'Admin User',
         role: 'admin'
@@ -28,7 +28,7 @@ async function createAdmin() {
     })
 
     console.log('✅ Admin user created successfully!')
-    console.log('📧 Email: admin@threadofhope.com')
+    console.log('📧 Email: rikariyani@gmail.com')
     console.log('🔑 Password: rikariyani9173')
     console.log('')
     console.log('You can now login at: /auth/login')

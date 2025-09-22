@@ -1,15 +1,21 @@
-import { getServerSession } from "next-auth/next"
-import { authOptions } from "@/lib/auth"
 import { redirect } from "next/navigation"
 import { prisma } from "@/lib/prisma"
 import AdminNavbar from "@/components/admin/admin-navbar"
 import CurhatManagement from "@/components/admin/curhat-management"
 
-export default async function AdminCurhatPage() {
-  const session = await getServerSession(authOptions)
+import { cookies } from "next/headers"
 
-  if (!session || session.user.role !== 'admin') {
-    redirect("/")
+export default async function AdminCurhatPage() {
+  const cookieStore = cookies()
+  const adminSession = cookieStore.get("admin_session")?.value
+  if (!adminSession) {
+    redirect("/admin/login")
+  }
+
+  // Optionally, fetch user info for navbar
+  const user = await prisma.user.findUnique({ where: { id: adminSession } })
+  if (!user || user.role !== "admin") {
+    redirect("/admin/login")
   }
 
   // Fetch all curhat stories directly from database
@@ -33,7 +39,7 @@ export default async function AdminCurhatPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <AdminNavbar user={session.user} />
+      <AdminNavbar user={user} />
       <CurhatManagement initialStories={stories} />
     </div>
   )

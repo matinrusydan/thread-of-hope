@@ -1,15 +1,22 @@
-import { getServerSession } from "next-auth/next"
-import { authOptions } from "@/lib/auth"
 import { redirect } from "next/navigation"
 import { apiUrl } from "@/lib/api"
 import AdminNavbar from "@/components/admin/admin-navbar"
 import EventManagement from "../../../components/admin/event-management"
 
-export default async function AdminEventsPage() {
-  const session = await getServerSession(authOptions)
+import { cookies } from "next/headers"
+import { prisma } from "@/lib/prisma"
 
-  if (!session || session.user.role !== 'admin') {
-    redirect("/")
+export default async function AdminEventsPage() {
+  const cookieStore = cookies()
+  const adminSession = cookieStore.get("admin_session")?.value
+  if (!adminSession) {
+    redirect("/admin/login")
+  }
+
+  // Optionally, fetch user info for navbar
+  const user = await prisma.user.findUnique({ where: { id: adminSession } })
+  if (!user || user.role !== "admin") {
+    redirect("/admin/login")
   }
 
   // Fetch all events from API using production-ready URL
@@ -39,7 +46,7 @@ export default async function AdminEventsPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <AdminNavbar user={session.user} />
+      <AdminNavbar user={user} />
       <EventManagement initialEvents={events} />
     </div>
   )

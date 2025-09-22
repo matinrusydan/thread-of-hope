@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { signOut } from "next-auth/react"
+// import { signOut } from "next-auth/react" (NextAuth removed)
 import { Button } from "@/components/ui/button"
 import { LogOut, Home } from "lucide-react"
 
@@ -15,10 +15,18 @@ interface AdminNavbarProps {
 }
 
 export default function AdminNavbar({ user }: AdminNavbarProps) {
-  const pathname = usePathname()
+  const pathname = usePathname() ?? '/'
 
   const handleSignOut = async () => {
-    await signOut({ callbackUrl: "/" })
+    try {
+      await fetch("/api/admin-logout", {
+        method: "POST",
+      })
+    } catch (error) {
+      console.error("Logout error:", error)
+    }
+    // Redirect to public user page
+    window.location.href = "/";
   }
 
   const navItems = [
@@ -82,3 +90,4 @@ export default function AdminNavbar({ user }: AdminNavbarProps) {
     </nav>
   )
 }
+

@@ -1,15 +1,20 @@
-import { redirect } from "next/navigation"
-import { getServerSession } from "next-auth/next"
-import { authOptions } from "@/lib/auth"
+import { cookies } from "next/headers"
 import { prisma } from "@/lib/prisma"
 import AdminNavbar from "@/components/admin/admin-navbar"
 import AdminDashboard from "@/components/admin/admin-dashboard"
+import { redirect } from "next/navigation"
 
 export default async function AdminPage() {
-  const session = await getServerSession(authOptions)
+  const cookieStore = cookies()
+  const adminSession = cookieStore.get("admin_session")?.value
+  if (!adminSession) {
+    redirect("/admin/login")
+  }
 
-  if (!session || session.user.role !== 'admin') {
-    redirect("/")
+  // Optionally, fetch user info for navbar
+  const user = await prisma.user.findUnique({ where: { id: adminSession } })
+  if (!user || user.role !== "admin") {
+    redirect("/admin/login")
   }
 
   // Fetch dashboard stats
@@ -29,7 +34,7 @@ export default async function AdminPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <AdminNavbar user={session.user} />
+      <AdminNavbar user={user} />
       <AdminDashboard stats={stats} />
     </div>
   )

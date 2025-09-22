@@ -1,15 +1,22 @@
-import { getServerSession } from "next-auth/next"
-import { authOptions } from "@/lib/auth"
 import { redirect } from "next/navigation"
 import { apiUrl } from "@/lib/api"
 import AdminNavbar from "@/components/admin/admin-navbar"
 import MemberManagement from "@/components/admin/member-management"
 
-export default async function AdminMembersPage() {
-  const session = await getServerSession(authOptions)
+import { cookies } from "next/headers"
+import { prisma } from "@/lib/prisma"
 
-  if (!session || session.user.role !== 'admin') {
-    redirect("/")
+export default async function AdminMembersPage() {
+  const cookieStore = cookies()
+  const adminSession = cookieStore.get("admin_session")?.value
+  if (!adminSession) {
+    redirect("/admin/login")
+  }
+
+  // Optionally, fetch user info for navbar
+  const user = await prisma.user.findUnique({ where: { id: adminSession } })
+  if (!user || user.role !== "admin") {
+    redirect("/admin/login")
   }
 
   // Fetch all community members from API
@@ -29,7 +36,7 @@ export default async function AdminMembersPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <AdminNavbar user={session.user} />
+      <AdminNavbar user={user} />
       <MemberManagement initialMembers={members} />
     </div>
   )
