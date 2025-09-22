@@ -24,20 +24,14 @@ export default function Page() {
     setError(null)
 
     try {
-      const result = await signIn("credentials", {
+      await signIn("credentials", {
         email,
         password,
-        redirect: false,
+        redirect: true,
+        callbackUrl: "/",
       })
-
-      if (result?.error) {
-        setError("Invalid credentials")
-      } else {
-        router.push("/")
-      }
     } catch (error: unknown) {
       setError("An error occurred")
-    } finally {
       setIsLoading(false)
     }
   }
