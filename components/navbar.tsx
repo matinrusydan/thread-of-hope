@@ -17,8 +17,13 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/" className="text-2xl font-bold text-foreground">
-            thread of hope
+          <Link href="/" className="flex items-center" aria-label="Thread of Hope Home">
+            <img
+              src="/images/logo-thread-of-hope-1.png"
+              alt="Thread of Hope Logo"
+              className="h-16 w-auto object-contain"
+              style={{ maxHeight: '3.5rem' }} // Bigger than 2xl, close to text-3xl
+            />
           </Link>
 
           {/* Desktop Navigation */}

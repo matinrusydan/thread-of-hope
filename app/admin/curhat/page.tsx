@@ -19,9 +19,17 @@ export default async function AdminCurhatPage() {
   }
 
   // Fetch all curhat stories directly from database
-  let stories = []
+  let stories: {
+    id: string;
+    title: string;
+    content: string;
+    authorName: string;
+    isApproved: boolean;
+    createdAt: string;
+    updatedAt: string;
+  }[] = []
   try {
-    stories = await prisma.curhat.findMany({
+    const dbStories = await prisma.curhat.findMany({
       orderBy: { createdAt: "desc" },
       select: {
         id: true,
@@ -33,6 +41,11 @@ export default async function AdminCurhatPage() {
         updatedAt: true,
       },
     })
+    stories = dbStories.map(story => ({
+      ...story,
+      createdAt: story.createdAt.toISOString(),
+      updatedAt: story.updatedAt.toISOString()
+    }))
   } catch (error) {
     console.error("Error fetching stories:", error)
   }
