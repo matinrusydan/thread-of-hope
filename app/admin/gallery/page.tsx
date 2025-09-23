@@ -1,7 +1,7 @@
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 import { prisma } from "@/lib/prisma"
-import AdminNavbar from "@/components/admin/admin-navbar"
+import AdminSidebar from "@/components/admin/admin-navbar"
 import GalleryManagement from "@/components/admin/gallery-management"
 
 export default async function AdminGalleryPage() {
@@ -31,9 +31,11 @@ export default async function AdminGalleryPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <AdminNavbar user={user} />
-      <GalleryManagement initialGalleryItems={galleryItems} />
+    <div className="min-h-screen bg-background flex">
+      <AdminSidebar user={user} />
+      <div className="flex-1 lg:ml-0">
+        <GalleryManagement initialGalleryItems={galleryItems} />
+      </div>
     </div>
   )
 }

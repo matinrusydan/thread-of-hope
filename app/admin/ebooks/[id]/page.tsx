@@ -1,7 +1,7 @@
-import { getServerSession } from "next-auth/next"
-import { authOptions } from "@/lib/auth"
+import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
-import AdminNavbar from "@/components/admin/admin-navbar"
+import { prisma } from "@/lib/prisma"
+import AdminSidebar from "@/components/admin/admin-navbar"
 import EbookEditForm from "@/components/admin/ebook-edit-form"
 
 export default async function AdminEbookEditPage({
@@ -9,16 +9,23 @@ export default async function AdminEbookEditPage({
 }: {
   params: { id: string }
 }) {
-  const session = await getServerSession(authOptions)
+  const cookieStore = cookies()
+  const adminSession = cookieStore.get("admin_session")?.value
+  if (!adminSession) {
+    redirect("/admin/login")
+  }
 
-  if (!session || session.user.role !== 'admin') {
-    redirect("/")
+  const user = await prisma.user.findUnique({ where: { id: adminSession } })
+  if (!user || user.role !== "admin") {
+    redirect("/admin/login")
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <AdminNavbar user={session.user} />
-      <EbookEditForm ebookId={params.id} />
+    <div className="min-h-screen bg-background flex">
+      <AdminSidebar user={user} />
+      <div className="flex-1 lg:ml-0">
+        <EbookEditForm ebookId={params.id} />
+      </div>
     </div>
   )
 }

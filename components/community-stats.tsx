@@ -6,6 +6,9 @@ import { Card, CardContent } from "@/components/ui/card"
 interface CommunityStatsProps {
 	stats: {
 		totalMembers: number
+		totalStories: number
+		totalEbooks: number
+		totalEvents: number
 	}
 }
 
@@ -21,21 +24,21 @@ export default function CommunityStats({ stats }: CommunityStatsProps) {
 		{
 			icon: Heart,
 			label: "Cerita Dibagikan",
-			value: "500+",
+			value: stats.totalStories.toLocaleString(),
 			color: "text-red-600",
 			bgColor: "bg-red-50",
 		},
 		{
 			icon: BookOpen,
 			label: "E-Book Tersedia",
-			value: "25+",
+			value: stats.totalEbooks.toLocaleString(),
 			color: "text-green-600",
 			bgColor: "bg-green-50",
 		},
 		{
 			icon: Calendar,
-			label: "Event Bulanan",
-			value: "12+",
+			label: "Event Tersedia",
+			value: stats.totalEvents.toLocaleString(),
 			color: "text-purple-600",
 			bgColor: "bg-purple-50",
 		},

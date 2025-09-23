@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation"
-import AdminNavbar from "@/components/admin/admin-navbar"
+import AdminSidebar from "@/components/admin/admin-navbar"
 import EventManagement from "../../../components/admin/event-management"
 
 import { cookies } from "next/headers"
@@ -36,9 +36,11 @@ export default async function AdminEventsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <AdminNavbar user={user} />
-      <EventManagement initialEvents={events} />
+    <div className="min-h-screen bg-background flex">
+      <AdminSidebar user={user} />
+      <div className="flex-1 lg:ml-0">
+        <EventManagement initialEvents={events} />
+      </div>
     </div>
   )
 }

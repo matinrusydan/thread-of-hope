@@ -6,15 +6,29 @@ import { prisma } from "@/lib/prisma"
 
 export default async function KomunitasPage() {
   // Fetch community stats from database
-  let totalMembers = 0
-  try {
-    totalMembers = await prisma.communityMember.count()
-  } catch (error) {
-    console.error("Error fetching community stats:", error)
+  let stats = {
+    totalMembers: 0,
+    totalStories: 0,
+    totalEbooks: 0,
+    totalEvents: 0,
   }
 
-  const stats = {
-    totalMembers,
+  try {
+    const [totalMembers, totalStories, totalEbooks, totalEvents] = await Promise.all([
+      prisma.communityMember.count({ where: { isApproved: true } }),
+      prisma.curhat.count({ where: { isApproved: true } }),
+      prisma.ebook.count({ where: { isPublished: true } }),
+      prisma.event.count(),
+    ])
+
+    stats = {
+      totalMembers,
+      totalStories,
+      totalEbooks,
+      totalEvents,
+    }
+  } catch (error) {
+    console.error("Error fetching community stats:", error)
   }
 
   return (

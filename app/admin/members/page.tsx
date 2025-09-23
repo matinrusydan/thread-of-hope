@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation"
-import AdminNavbar from "@/components/admin/admin-navbar"
+import AdminSidebar from "@/components/admin/admin-navbar"
 import MemberManagement from "@/components/admin/member-management"
 
 import { cookies } from "next/headers"
@@ -34,9 +34,11 @@ export default async function AdminMembersPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <AdminNavbar user={user} />
-      <MemberManagement initialMembers={members} />
+    <div className="min-h-screen bg-background flex">
+      <AdminSidebar user={user} />
+      <div className="flex-1 lg:ml-0">
+        <MemberManagement initialMembers={members} />
+      </div>
     </div>
   )
 }

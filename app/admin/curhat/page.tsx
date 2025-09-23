@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation"
 import { prisma } from "@/lib/prisma"
-import AdminNavbar from "@/components/admin/admin-navbar"
+import AdminSidebar from "@/components/admin/admin-navbar"
 import CurhatManagement from "@/components/admin/curhat-management"
 
 import { cookies } from "next/headers"
@@ -51,9 +51,11 @@ export default async function AdminCurhatPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <AdminNavbar user={user} />
-      <CurhatManagement initialStories={stories} />
+    <div className="min-h-screen bg-background flex">
+      <AdminSidebar user={user} />
+      <div className="flex-1 lg:ml-0">
+        <CurhatManagement initialStories={stories} />
+      </div>
     </div>
   )
 }

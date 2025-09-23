@@ -2,12 +2,12 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import Link from "next/link"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
-import { Download, Search, BookOpen, Calendar } from "lucide-react"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Download, Search, BookOpen, Calendar, Eye } from "lucide-react"
 import { formatDistanceToNow } from "date-fns"
 import { id } from "date-fns/locale"
 
@@ -151,12 +151,58 @@ export default function EbookGrid({ initialEbooks }: EbookGridProps) {
                   </div>
 
                   <div className="flex gap-1">
-                    <Link href={`/ebook/${ebook.id}`} className="flex-1">
-                      <Button variant="outline" size="sm" className="w-full bg-transparent text-xs h-7">
-                        <BookOpen className="w-3 h-3 mr-1" />
-                        Detail
-                      </Button>
-                    </Link>
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button variant="outline" size="sm" className="flex-1 bg-transparent text-xs h-7">
+                          <Eye className="w-3 h-3 mr-1" />
+                          Detail
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent className="max-w-md">
+                        <DialogHeader>
+                          <DialogTitle className="text-lg">{ebook.title}</DialogTitle>
+                        </DialogHeader>
+                        <div className="space-y-4">
+                          <div className="relative aspect-square w-full overflow-hidden rounded-lg bg-muted">
+                            {ebook.coverImagePath ? (
+                              <Image
+                                src={ebook.coverImagePath}
+                                alt={ebook.title}
+                                fill
+                                className="object-contain"
+                              />
+                            ) : (
+                              <div className="w-full h-full flex items-center justify-center">
+                                <BookOpen className="w-12 h-12 text-muted-foreground" />
+                              </div>
+                            )}
+                          </div>
+                          <div className="space-y-2">
+                            <div>
+                              <span className="font-semibold">Penulis:</span> {ebook.author}
+                            </div>
+                            <div>
+                              <span className="font-semibold">Kategori:</span>{" "}
+                              <Badge variant="secondary">{ebook.category}</Badge>
+                            </div>
+                            <div>
+                              <span className="font-semibold">Dilihat:</span> {ebook.viewCount} kali
+                            </div>
+                            <div>
+                              <span className="font-semibold">Deskripsi:</span>
+                              <p className="mt-1 text-sm text-muted-foreground">{ebook.description}</p>
+                            </div>
+                          </div>
+                          <Button
+                            onClick={() => handleView(ebook.id, ebook.externalUrl)}
+                            className="w-full"
+                          >
+                            <BookOpen className="w-4 h-4 mr-2" />
+                            Baca Selengkapnya
+                          </Button>
+                        </div>
+                      </DialogContent>
+                    </Dialog>
                     <Button
                       onClick={() => handleView(ebook.id, ebook.externalUrl)}
                       size="sm"

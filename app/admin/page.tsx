@@ -1,6 +1,6 @@
 import { cookies } from "next/headers"
 import { prisma } from "@/lib/prisma"
-import AdminNavbar from "@/components/admin/admin-navbar"
+import AdminSidebar from "@/components/admin/admin-navbar"
 import AdminDashboard from "@/components/admin/admin-dashboard"
 import { redirect } from "next/navigation"
 
@@ -33,9 +33,11 @@ export default async function AdminPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <AdminNavbar user={user} />
-      <AdminDashboard stats={stats} />
+    <div className="min-h-screen bg-background flex">
+      <AdminSidebar user={user} />
+      <div className="flex-1 lg:ml-0">
+        <AdminDashboard stats={stats} />
+      </div>
     </div>
   )
 }
