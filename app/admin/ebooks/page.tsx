@@ -22,7 +22,6 @@ export default async function AdminEbooksPage() {
   let ebooks = []
   try {
     const response = await fetch(apiUrl('/api/ebooks?limit=1000&published=false'), {
-      cache: 'force-cache',
       next: { revalidate: 300 } // Revalidate every 5 minutes
     })
     if (response.ok) {
