@@ -10,6 +10,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { ArrowLeft, Upload, Save } from "lucide-react"
 import Link from "next/link"
+import { Toast } from "@/components/ui/toast"
 import { apiUrl } from "@/lib/api"
 
 const categories = [
@@ -30,6 +31,7 @@ export default function GalleryCreateForm() {
     imagePath: "",
     category: ""
   })
+  const [showToast, setShowToast] = useState(false);
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }))
@@ -38,6 +40,12 @@ export default function GalleryCreateForm() {
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
+
+    // Limit 2MB
+    if (file.size > 2 * 1024 * 1024) {
+      setShowToast(true);
+      return;
+    }
 
     setUploadingImage(true)
     try {
@@ -104,6 +112,7 @@ export default function GalleryCreateForm() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <Toast message="Ukuran gambar terlalu besar (maksimal 2MB)" show={showToast} onClose={() => setShowToast(false)} />
       <div className="mb-8">
         <Link href="/admin/gallery">
           <Button variant="ghost" className="mb-4">

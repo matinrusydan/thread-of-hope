@@ -20,7 +20,6 @@ export default async function AdminGalleryPage() {
   let galleryItems = []
   try {
     const response = await fetch(apiUrl('/api/gallery?limit=1000'), {
-      cache: 'force-cache',
       next: { revalidate: 300 } // Revalidate every 5 minutes
     })
     if (response.ok) {

@@ -10,6 +10,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import { ArrowLeft, Upload, Save } from "lucide-react"
 import Link from "next/link"
+import { Toast } from "@/components/ui/toast"
 
 export default function EventCreateForm() {
   const router = useRouter()
@@ -23,6 +24,7 @@ export default function EventCreateForm() {
     imagePath: "",
     isFeatured: false
   })
+    const [showToast, setShowToast] = useState(false);
 
   const handleInputChange = (field: string, value: string | boolean) => {
     setFormData(prev => ({ ...prev, [field]: value }))
@@ -32,6 +34,11 @@ export default function EventCreateForm() {
     const file = e.target.files?.[0]
     if (!file) return
 
+      // Limit 2MB
+      if (file.size > 2 * 1024 * 1024) {
+        setShowToast(true);
+        return;
+      }
     setUploadingImage(true)
     try {
       const formDataUpload = new FormData()
@@ -162,6 +169,7 @@ export default function EventCreateForm() {
 
             <div className="space-y-2">
               <Label htmlFor="image">Gambar Event (Opsional)</Label>
+                <Toast message="Ukuran gambar terlalu besar (maksimal 2MB)" show={showToast} onClose={() => setShowToast(false)} />
               <Input
                 id="image"
                 type="file"

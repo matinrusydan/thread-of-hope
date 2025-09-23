@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { getServerSession } from 'next-auth/next'
-import { authOptions } from '@/lib/auth'
+import { prisma } from '@/lib/prisma'
 import { uploadImage, getFileUrl } from '@/lib/upload'
 
 export const config = {
@@ -15,10 +14,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    // Check authentication
-    const session = await getServerSession(req, res, authOptions as any)
-    if (!session || (session as any).user?.role !== 'admin') {
-      return res.status(401).json({ error: 'Unauthorized' })
+    // Check custom admin session
+    const cookiesHeader = req.headers.cookie || '';
+    const match = cookiesHeader.match(/admin_session=([^;]+)/);
+    const adminSession = match ? match[1] : null;
+    if (!adminSession) {
+      return res.status(401).json({ error: 'Unauthorized' });
+    }
+    const user = await prisma.user.findUnique({ where: { id: adminSession } });
+    if (!user || user.role !== 'admin') {
+      return res.status(401).json({ error: 'Unauthorized' });
     }
 
     // Handle file upload
