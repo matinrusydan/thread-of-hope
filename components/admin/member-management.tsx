@@ -91,7 +91,7 @@ export default function MemberManagement({ initialMembers }: MemberManagementPro
     }
   }
 
-  const pendingMembers = members.filter((member) => member.isApproved === null || member.isApproved === undefined)
+  const pendingMembers = members.filter((member) => member.isApproved === null)
   const approvedMembers = members.filter((member) => member.isApproved === true)
   const rejectedMembers = members.filter((member) => member.isApproved === false)
 
@@ -148,7 +148,8 @@ export default function MemberManagement({ initialMembers }: MemberManagementPro
         </div>
 
         <div className="flex items-center space-x-2 pt-2">
-          {member.isApproved === null || member.isApproved === undefined ? (
+          {member.isApproved === null ? (
+            // Pending members
             <>
               <Button
                 size="sm"
@@ -170,6 +171,7 @@ export default function MemberManagement({ initialMembers }: MemberManagementPro
               </Button>
             </>
           ) : member.isApproved === true ? (
+            // Approved members
             <>
               <Button
                 size="sm"

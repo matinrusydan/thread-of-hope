@@ -94,7 +94,7 @@ model CommunityMember {
   occupation    String?
   motivation    String?
   howDidYouHear String?
-  isApproved    Boolean  @default(false)
+  isApproved    Boolean? // null = pending, true = approved, false = rejected
   joinedAt      DateTime @default(now())
 }
 

@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
         occupation,
         motivation,
         howDidYouHear,
-        isApproved: false, // Requires admin approval
+        isApproved: null, // null = pending, true = approved, false = rejected
       },
     })
 

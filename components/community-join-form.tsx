@@ -80,9 +80,14 @@ export default function CommunityJoinForm() {
                 Pendaftaran Anda telah berhasil dikirim. Tim kami akan meninjau aplikasi Anda dan menghubungi Anda dalam
                 1-3 hari kerja.
               </p>
-              <Button onClick={() => setSubmitted(false)} variant="outline">
-                Daftar Lagi
-              </Button>
+              <div className="flex gap-4 justify-center">
+                <Button onClick={() => window.location.href = "/"} className="bg-primary text-primary-foreground hover:bg-secondary">
+                  Kembali ke Beranda
+                </Button>
+                <Button onClick={() => setSubmitted(false)} variant="outline">
+                  Daftar Lagi
+                </Button>
+              </div>
             </CardContent>
           </Card>
         </div>

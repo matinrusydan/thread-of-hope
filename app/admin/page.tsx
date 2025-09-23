@@ -20,9 +20,9 @@ export default async function AdminPage() {
   // Fetch dashboard stats
   const [pendingCurhat, totalEbooks, totalGallery, totalMembers] = await Promise.all([
     prisma.curhat.count({ where: { isApproved: false } }),
-    prisma.ebook.count(),
+    prisma.ebook.count({ where: { isPublished: true } }),
     prisma.gallery.count(),
-    prisma.communityMember.count(),
+    prisma.communityMember.count({ where: { isApproved: true } }),
   ])
 
   const stats = {
