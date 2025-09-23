@@ -2,17 +2,13 @@ import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import CommunityJoinForm from "@/components/community-join-form"
 import CommunityStats from "@/components/community-stats"
+import { prisma } from "@/lib/prisma"
 
 export default async function KomunitasPage() {
-  // Fetch community stats from API
+  // Fetch community stats from database
   let totalMembers = 0
   try {
-    // TODO: Create API endpoint for community stats
-    // const response = await fetch('/api/community/stats')
-    // if (response.ok) {
-    //   const data = await response.json()
-    //   totalMembers = data.totalMembers || 0
-    // }
+    totalMembers = await prisma.communityMember.count()
   } catch (error) {
     console.error("Error fetching community stats:", error)
   }

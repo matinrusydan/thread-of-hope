@@ -1,22 +1,24 @@
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import EbookGrid from "@/components/ebook-grid"
-import { apiUrl } from "@/lib/api"
+import { prisma } from "@/lib/prisma"
 
 // Disable static generation for this page (needs database)
 export const dynamic = 'force-dynamic'
 
 export default async function EbookPage() {
-  // Fetch published ebooks from API
-  let ebooks = []
+  // Fetch published ebooks from database
+  let ebooks: any[] = []
   try {
-    const response = await fetch(apiUrl('/api/ebooks?published=true&limit=50'), {
-      next: { revalidate: 3600 } // Revalidate every hour
+    const dbEbooks = await prisma.ebook.findMany({
+      where: { isPublished: true },
+      take: 50,
+      orderBy: { createdAt: "desc" },
     })
-    if (response.ok) {
-      const data = await response.json()
-      ebooks = data.data || []
-    }
+    ebooks = dbEbooks.map(ebook => ({
+      ...ebook,
+      createdAt: ebook.createdAt.toISOString(),
+    }))
   } catch (error) {
     console.error("Error fetching ebooks:", error)
     // Continue with empty array

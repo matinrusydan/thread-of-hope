@@ -1,7 +1,6 @@
 import { prisma } from "@/lib/prisma"
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
-import { apiUrl } from "@/lib/api"
 import AdminNavbar from "@/components/admin/admin-navbar"
 import EbookManagement from "@/components/admin/ebook-management"
 
@@ -18,16 +17,18 @@ export default async function AdminEbooksPage() {
     redirect("/admin/login")
   }
 
-  // Fetch all ebooks from API
-  let ebooks = []
+  // Fetch all ebooks from database
+  let ebooks: any[] = []
   try {
-    const response = await fetch(apiUrl('/api/ebooks?limit=1000&published=false'), {
-      next: { revalidate: 300 } // Revalidate every 5 minutes
+    const dbEbooks = await prisma.ebook.findMany({
+      orderBy: { createdAt: "desc" },
+      take: 1000,
     })
-    if (response.ok) {
-      const data = await response.json()
-      ebooks = data.data || []
-    }
+    ebooks = dbEbooks.map(ebook => ({
+      ...ebook,
+      description: ebook.description || '',
+      createdAt: ebook.createdAt.toISOString(),
+    }))
   } catch (error) {
     console.error("Error fetching ebooks:", error)
   }

@@ -1,6 +1,5 @@
 import { prisma } from "@/lib/prisma"
-import { getServerSession } from "next-auth/next"
-import { authOptions } from "@/lib/auth"
+import { cookies } from "next/headers"
 import { type NextRequest, NextResponse } from "next/server"
 
 export const dynamic = 'force-dynamic'
@@ -10,9 +9,13 @@ export async function PATCH(
   { params }: { params: { id: string } }
 ) {
   try {
-    const session = await getServerSession(authOptions)
-
-    if (!session || session.user.role !== 'admin') {
+    const cookieStore = cookies()
+    const adminSession = cookieStore.get("admin_session")?.value
+    if (!adminSession) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    }
+    const user = await prisma.user.findUnique({ where: { id: adminSession } })
+    if (!user || user.role !== "admin") {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 
@@ -32,5 +35,31 @@ export async function PATCH(
   } catch (error) {
     console.error("Database error:", error)
     return NextResponse.json({ error: "Failed to update member" }, { status: 500 })
+  }
+}
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const cookieStore = cookies()
+    const adminSession = cookieStore.get("admin_session")?.value
+    if (!adminSession) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    }
+    const user = await prisma.user.findUnique({ where: { id: adminSession } })
+    if (!user || user.role !== "admin") {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    }
+
+    await prisma.communityMember.delete({
+      where: { id: params.id },
+    })
+
+    return NextResponse.json({ success: true })
+  } catch (error) {
+    console.error("Database error:", error)
+    return NextResponse.json({ error: "Failed to delete member" }, { status: 500 })
   }
 }

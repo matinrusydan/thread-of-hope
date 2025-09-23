@@ -2,35 +2,38 @@ import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
-import { apiUrl } from '@/lib/api'
+import { prisma } from '@/lib/prisma'
 const Calendar = dynamic(() => import('@/components/calendar'), { ssr: false })
 
 // Disable static generation for this page (needs database)
 export const revalidate = 0
 
 export default async function GaleriPage() {
-  // Fetch gallery items from API
+  // Fetch gallery items and events from database
   let galleryItems: any[] = []
   let eventsList: any[] = []
 
   try {
     // Fetch gallery items
-    const galleryResponse = await fetch(apiUrl('/api/gallery?limit=20'), {
-      next: { revalidate: 300 } // Revalidate every 5 minutes
+    const dbGalleryItems = await prisma.gallery.findMany({
+      take: 20,
+      orderBy: { createdAt: "desc" },
     })
-    if (galleryResponse.ok) {
-      const data = await galleryResponse.json()
-      galleryItems = data.data || []
-    }
+    galleryItems = dbGalleryItems.map(item => ({
+      ...item,
+      createdAt: item.createdAt.toISOString(),
+    }))
 
     // Fetch events
-    const eventsResponse = await fetch(apiUrl('/api/events?limit=100'), {
-      next: { revalidate: 3600 } // Revalidate every hour
+    const dbEvents = await prisma.event.findMany({
+      take: 100,
+      orderBy: { eventDate: "asc" },
     })
-    if (eventsResponse.ok) {
-      const data = await eventsResponse.json()
-      eventsList = data.data || []
-    }
+    eventsList = dbEvents.map(event => ({
+      ...event,
+      eventDate: event.eventDate?.toISOString() || null,
+      createdAt: event.createdAt.toISOString(),
+    }))
   } catch (error) {
     console.error('Error fetching data for gallery:', error)
   }

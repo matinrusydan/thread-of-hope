@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Check, X, Mail, Phone, MapPin, Briefcase } from "lucide-react"
+import { Check, X, Mail, Phone, MapPin, Briefcase, Trash2 } from "lucide-react"
 import { apiUrl } from "@/lib/api"
 
 interface CommunityMember {
@@ -52,6 +52,8 @@ export default function MemberManagement({ initialMembers }: MemberManagementPro
   }
 
   const handleReject = async (memberId: string) => {
+    if (!confirm("Apakah Anda yakin ingin menolak anggota ini?")) return
+
     setLoading(memberId)
     try {
       const response = await fetch(apiUrl(`/api/community/members/${memberId}`), {
@@ -61,7 +63,7 @@ export default function MemberManagement({ initialMembers }: MemberManagementPro
       })
 
       if (response.ok) {
-        setMembers(members.map((member) => (member.id === memberId ? { ...member, isApproved: false } : member)))
+        setMembers(members.filter((member) => member.id !== memberId)) // Remove from list since rejected
       }
     } catch (error) {
       console.error("Error rejecting member:", error)
@@ -70,8 +72,28 @@ export default function MemberManagement({ initialMembers }: MemberManagementPro
     }
   }
 
-  const pendingMembers = members.filter((member) => !member.isApproved)
-  const approvedMembers = members.filter((member) => member.isApproved)
+  const handleDelete = async (memberId: string) => {
+    if (!confirm("Apakah Anda yakin ingin menghapus anggota ini? Tindakan ini tidak dapat dibatalkan.")) return
+
+    setLoading(memberId)
+    try {
+      const response = await fetch(apiUrl(`/api/community/members/${memberId}`), {
+        method: "DELETE",
+      })
+
+      if (response.ok) {
+        setMembers(members.filter((member) => member.id !== memberId))
+      }
+    } catch (error) {
+      console.error("Error deleting member:", error)
+    } finally {
+      setLoading(null)
+    }
+  }
+
+  const pendingMembers = members.filter((member) => member.isApproved === null || member.isApproved === undefined)
+  const approvedMembers = members.filter((member) => member.isApproved === true)
+  const rejectedMembers = members.filter((member) => member.isApproved === false)
 
   const MemberCard = ({ member }: { member: CommunityMember }) => (
     <Card key={member.id} className="mb-4">
@@ -126,27 +148,58 @@ export default function MemberManagement({ initialMembers }: MemberManagementPro
         </div>
 
         <div className="flex items-center space-x-2 pt-2">
-          {!member.isApproved && (
+          {member.isApproved === null || member.isApproved === undefined ? (
+            <>
+              <Button
+                size="sm"
+                onClick={() => handleApprove(member.id)}
+                disabled={loading === member.id}
+                className="bg-green-600 hover:bg-green-700"
+              >
+                <Check className="w-4 h-4 mr-1" />
+                Setujui
+              </Button>
+              <Button
+                size="sm"
+                variant="destructive"
+                onClick={() => handleReject(member.id)}
+                disabled={loading === member.id}
+              >
+                <X className="w-4 h-4 mr-1" />
+                Tolak
+              </Button>
+            </>
+          ) : member.isApproved === true ? (
+            <>
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => handleReject(member.id)}
+                disabled={loading === member.id}
+              >
+                <X className="w-4 h-4 mr-1" />
+                Cabut
+              </Button>
+              <Button
+                size="sm"
+                variant="destructive"
+                onClick={() => handleDelete(member.id)}
+                disabled={loading === member.id}
+              >
+                <Trash2 className="w-4 h-4 mr-1" />
+                Hapus
+              </Button>
+            </>
+          ) : (
+            // Rejected members - only delete button
             <Button
               size="sm"
-              onClick={() => handleApprove(member.id)}
-              disabled={loading === member.id}
-              className="bg-green-600 hover:bg-green-700"
-            >
-              <Check className="w-4 h-4 mr-1" />
-              Setujui
-            </Button>
-          )}
-
-          {member.isApproved && (
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => handleReject(member.id)}
+              variant="destructive"
+              onClick={() => handleDelete(member.id)}
               disabled={loading === member.id}
             >
-              <X className="w-4 h-4 mr-1" />
-              Cabut
+              <Trash2 className="w-4 h-4 mr-1" />
+              Hapus
             </Button>
           )}
 
@@ -170,6 +223,7 @@ export default function MemberManagement({ initialMembers }: MemberManagementPro
         <TabsList>
           <TabsTrigger value="pending">Menunggu Tinjauan ({pendingMembers.length})</TabsTrigger>
           <TabsTrigger value="approved">Disetujui ({approvedMembers.length})</TabsTrigger>
+          <TabsTrigger value="rejected">Ditolak ({rejectedMembers.length})</TabsTrigger>
           <TabsTrigger value="all">Semua Anggota ({members.length})</TabsTrigger>
         </TabsList>
 
@@ -192,6 +246,18 @@ export default function MemberManagement({ initialMembers }: MemberManagementPro
             <Card>
               <CardContent className="text-center py-8">
                 <p className="text-muted-foreground">Belum ada anggota yang disetujui</p>
+              </CardContent>
+            </Card>
+          )}
+        </TabsContent>
+
+        <TabsContent value="rejected">
+          {rejectedMembers.length > 0 ? (
+            rejectedMembers.map((member) => <MemberCard key={member.id} member={member} />)
+          ) : (
+            <Card>
+              <CardContent className="text-center py-8">
+                <p className="text-muted-foreground">Belum ada anggota yang ditolak</p>
               </CardContent>
             </Card>
           )}

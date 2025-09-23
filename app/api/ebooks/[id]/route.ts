@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma"
+import { cookies } from "next/headers"
 import { type NextRequest, NextResponse } from "next/server"
 
 interface RouteParams {
@@ -31,6 +32,16 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
 
 export async function PATCH(request: NextRequest, { params }: RouteParams) {
   try {
+    const cookieStore = cookies()
+    const adminSession = cookieStore.get("admin_session")?.value
+    if (!adminSession) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    }
+    const user = await prisma.user.findUnique({ where: { id: adminSession } })
+    if (!user || user.role !== "admin") {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    }
+
     const { id } = await params
     const body = await request.json()
     const { isPublished, isFeatured, title, description, author, category, coverImagePath, externalUrl } = body
@@ -58,6 +69,16 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
 
 export async function DELETE(request: NextRequest, { params }: RouteParams) {
   try {
+    const cookieStore = cookies()
+    const adminSession = cookieStore.get("admin_session")?.value
+    if (!adminSession) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    }
+    const user = await prisma.user.findUnique({ where: { id: adminSession } })
+    if (!user || user.role !== "admin") {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    }
+
     const { id } = await params
 
     await prisma.ebook.delete({

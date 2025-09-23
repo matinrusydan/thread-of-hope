@@ -1,7 +1,6 @@
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 import { prisma } from "@/lib/prisma"
-import { apiUrl } from "@/lib/api"
 import AdminNavbar from "@/components/admin/admin-navbar"
 import GalleryManagement from "@/components/admin/gallery-management"
 
@@ -16,16 +15,17 @@ export default async function AdminGalleryPage() {
     redirect("/admin/login")
   }
 
-  // Fetch all gallery items from API
-  let galleryItems = []
+  // Fetch all gallery items from database
+  let galleryItems: any[] = []
   try {
-    const response = await fetch(apiUrl('/api/gallery?limit=1000'), {
-      next: { revalidate: 300 } // Revalidate every 5 minutes
+    const dbGalleryItems = await prisma.gallery.findMany({
+      orderBy: { createdAt: "desc" },
+      take: 1000,
     })
-    if (response.ok) {
-      const data = await response.json()
-      galleryItems = data.data || []
-    }
+    galleryItems = dbGalleryItems.map(item => ({
+      ...item,
+      createdAt: item.createdAt.toISOString(),
+    }))
   } catch (error) {
     console.error("Error fetching gallery items:", error)
   }

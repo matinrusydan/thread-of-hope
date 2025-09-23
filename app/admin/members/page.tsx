@@ -1,5 +1,4 @@
 import { redirect } from "next/navigation"
-import { apiUrl } from "@/lib/api"
 import AdminNavbar from "@/components/admin/admin-navbar"
 import MemberManagement from "@/components/admin/member-management"
 
@@ -19,17 +18,17 @@ export default async function AdminMembersPage() {
     redirect("/admin/login")
   }
 
-  // Fetch all community members from API
-  let members = []
+  // Fetch all community members from database
+  let members: any[] = []
   try {
-    const response = await fetch(apiUrl('/api/community?limit=1000'), {
-      cache: 'force-cache',
-      next: { revalidate: 60 } // Revalidate every minute
+    const dbMembers = await prisma.communityMember.findMany({
+      orderBy: { joinedAt: "desc" },
+      take: 1000,
     })
-    if (response.ok) {
-      const data = await response.json()
-      members = data.data || []
-    }
+    members = dbMembers.map(member => ({
+      ...member,
+      joinedAt: member.joinedAt.toISOString(),
+    }))
   } catch (error) {
     console.error("Error fetching members:", error)
   }

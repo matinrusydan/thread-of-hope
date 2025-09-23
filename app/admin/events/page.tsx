@@ -1,5 +1,4 @@
 import { redirect } from "next/navigation"
-import { apiUrl } from "@/lib/api"
 import AdminNavbar from "@/components/admin/admin-navbar"
 import EventManagement from "../../../components/admin/event-management"
 
@@ -19,29 +18,21 @@ export default async function AdminEventsPage() {
     redirect("/admin/login")
   }
 
-  // Fetch all events from API using production-ready URL
-  let events = []
+  // Fetch all events from database
+  let events: any[] = []
   try {
-    // ✅ PRODUCTION-READY: Automatically detects environment
-    const fullApiUrl = apiUrl('/api/events?limit=1000')
-    console.log('Fetching events from:', apiUrl) // For debugging
-
-    const response = await fetch(fullApiUrl, {
-      cache: 'force-cache',
-      next: { revalidate: 300 } // Revalidate every 5 minutes
+    const dbEvents = await prisma.event.findMany({
+      orderBy: { eventDate: "asc" },
+      take: 1000,
     })
-
-    if (response.ok) {
-      const data = await response.json()
-      events = data.data || []
-      console.log(`Successfully fetched ${events.length} events`)
-    } else {
-      console.error(`Failed to fetch events: ${response.status} ${response.statusText}`)
-    }
+    events = dbEvents.map(event => ({
+      ...event,
+      eventDate: event.eventDate?.toISOString() || null,
+      createdAt: event.createdAt.toISOString(),
+    }))
+    console.log(`Successfully fetched ${events.length} events`)
   } catch (error) {
     console.error("Error fetching events:", error)
-    // In production, you might want to show a user-friendly error
-    // or fall back to a different data source
   }
 
   return (
