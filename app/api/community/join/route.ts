@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
         occupation,
         motivation,
         howDidYouHear,
-        isApproved: null, // null = pending, true = approved, false = rejected
+        isApproved: undefined, // undefined = pending, true = approved, false = rejected
       },
     })
 
