@@ -1,3 +1,5 @@
+"use client"
+// ...existing code...
 import { Users, Heart, BookOpen, Calendar } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 
