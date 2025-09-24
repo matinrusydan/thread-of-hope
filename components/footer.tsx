@@ -36,8 +36,8 @@ export default function Footer() {
           {/* Contact Info */}
           <div>
             <ul className="space-y-2 mb-4">
-              <li className="text-card-foreground">+62 123456798</li>
-              <li className="text-card-foreground">email@gmail.com</li>
+              <li className="text-card-foreground">+62 815-4656-3463</li>
+              <li className="text-card-foreground">rikariyani0602@gmail.com</li>
             </ul>
             <div className="flex space-x-3">
               <Link href="#" className="hover:opacity-75 transition-opacity">
