@@ -12,17 +12,34 @@ export default async function HomePage() {
   let stories: any[] = []
 
   try {
-    // Fetch from API to ensure consistent data structure
-    const response = await fetch('/api/curhat?approved=true&limit=10', {
-      cache: 'no-store'
+    const curhatStories = await prisma.curhat.findMany({
+      where: { isApproved: true },
+      orderBy: { createdAt: 'desc' },
+      take: 10,
+      include: {
+        comments: {
+          where: { isApproved: true },
+          orderBy: { createdAt: 'asc' },
+          select: {
+            id: true,
+            content: true,
+            authorName: true,
+            createdAt: true,
+          },
+        },
+        _count: {
+          select: { comments: true, likes: true }
+        }
+      },
     })
 
-    if (response.ok) {
-      const data = await response.json()
-      stories = data.data || []
-    } else {
-      console.error("Failed to fetch curhat stories from API")
-    }
+    stories = curhatStories.map(story => ({
+      ...story,
+      author_name: story.authorName,
+      created_at: story.createdAt.toISOString(),
+      likes: story._count.likes,
+      _count: undefined
+    }))
   } catch (error) {
     console.error("Error fetching curhat stories:", error)
   }
