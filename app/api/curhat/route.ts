@@ -43,11 +43,27 @@ export async function GET(request: NextRequest) {
         orderBy: { createdAt: "desc" },
         skip,
         take: limit,
+        include: {
+          comments: {
+            where: { isApproved: true },
+            orderBy: { createdAt: "asc" },
+          },
+          _count: {
+            select: { likes: true }
+          }
+        },
       }),
       prisma.curhat.count({
         where: approved ? { isApproved: true } : {},
       }),
     ])
+
+    // Transform data to include likes count
+    const transformedData = data.map(story => ({
+      ...story,
+      likes: story._count.likes,
+      _count: undefined
+    }))
 
     return NextResponse.json({
       data,

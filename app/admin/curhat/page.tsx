@@ -5,6 +5,8 @@ import CurhatManagement from "@/components/admin/curhat-management"
 
 import { cookies } from "next/headers"
 
+export const dynamic = 'force-dynamic'
+
 export default async function AdminCurhatPage() {
   const cookieStore = cookies()
   const adminSession = cookieStore.get("admin_session")?.value

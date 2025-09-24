@@ -24,7 +24,11 @@ export async function POST(request: NextRequest) {
     })
 
     if (existingMember) {
-      return NextResponse.json({ error: "Email already registered" }, { status: 400 })
+      if (existingMember.isApproved === false) {
+        return NextResponse.json({ error: "Mohon maaf anda tidak diizinkan mendaftar" }, { status: 400 })
+      } else {
+        return NextResponse.json({ error: "Email already registered" }, { status: 400 })
+      }
     }
 
     const data = await prisma.communityMember.create({

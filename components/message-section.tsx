@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import Image from "next/image"
+import Link from "next/link"
 
 interface CurhatMessage {
   id: string
@@ -42,6 +43,14 @@ export default function MessageSection() {
           <div className="text-center">
             <div className="animate-pulse">Loading messages...</div>
           </div>
+  
+          {messages.length >= 3 && (
+            <div className="text-center mt-8">
+              <Link href="/komunitas" className="text-primary text-lg font-medium hover:text-primary/80">
+                Lihat lainnya
+              </Link>
+            </div>
+          )}
         </div>
       </section>
     )

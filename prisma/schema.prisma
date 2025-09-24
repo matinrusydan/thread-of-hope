@@ -58,15 +58,27 @@ model VerificationToken {
 }
 
 model Curhat {
-  id         String   @id @default(cuid())
+  id         String    @id @default(cuid())
   title      String
   content    String
   authorName String
-  isApproved Boolean  @default(false)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  isApproved Boolean   @default(false)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
   authorId   String?
-  author     User?    @relation(fields: [authorId], references: [id])
+  author     User?     @relation(fields: [authorId], references: [id])
+  comments   Comment[]
+  likes      CurhatLike[]
+}
+
+model CurhatLike {
+  id       String  @id @default(cuid())
+  curhatId String
+  curhat   Curhat @relation(fields: [curhatId], references: [id], onDelete: Cascade)
+  userId   String? // null for anonymous users
+  clientId String  // unique identifier for anonymous users
+
+  @@unique([curhatId, clientId])
 }
 
 model Ebook {
@@ -84,16 +96,26 @@ model Ebook {
   viewCount      Int      @default(0)
 }
 
+model Comment {
+  id         String   @id @default(cuid())
+  content    String
+  authorName String?  // null for anonymous
+  curhatId   String
+  curhat     Curhat   @relation(fields: [curhatId], references: [id], onDelete: Cascade)
+  isApproved Boolean  @default(false)
+  createdAt  DateTime @default(now())
+}
+
 model CommunityMember {
   id            String   @id @default(cuid())
   fullName      String
   email         String   @unique
   phone         String?
-  age           Int?
-  city          String?
+  age           Int
+  city          String
   occupation    String?
-  motivation    String?
-  howDidYouHear String?
+  motivation    String
+  howDidYouHear String
   isApproved    Boolean? // null = pending, true = approved, false = rejected
   joinedAt      DateTime @default(now())
 }

@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Toast } from "@/components/ui/toast"
 import { Users, Mail, Phone, MapPin } from "lucide-react"
 
 export default function CommunityJoinForm() {
@@ -27,6 +28,11 @@ export default function CommunityJoinForm() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [toast, setToast] = useState<{ message: string; show: boolean; type: "error" | "success" }>({
+    message: "",
+    show: false,
+    type: "error"
+  })
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -56,11 +62,20 @@ export default function CommunityJoinForm() {
           agree_privacy: false,
         })
       } else {
-        alert("Terjadi kesalahan. Silakan coba lagi.")
+        const errorData = await response.json()
+        setToast({
+          message: errorData.error || "Terjadi kesalahan. Silakan coba lagi.",
+          show: true,
+          type: "error"
+        })
       }
     } catch (error) {
       console.error("Error submitting form:", error)
-      alert("Terjadi kesalahan. Silakan coba lagi.")
+      setToast({
+        message: "Terjadi kesalahan. Silakan coba lagi.",
+        show: true,
+        type: "error"
+      })
     } finally {
       setIsSubmitting(false)
     }
@@ -91,6 +106,13 @@ export default function CommunityJoinForm() {
             </CardContent>
           </Card>
         </div>
+  
+        <Toast
+          message={toast.message}
+          show={toast.show}
+          onClose={() => setToast(prev => ({ ...prev, show: false }))}
+          type={toast.type}
+        />
       </section>
     )
   }
@@ -288,6 +310,13 @@ export default function CommunityJoinForm() {
           </CardContent>
         </Card>
       </div>
+
+      <Toast
+        message={toast.message}
+        show={toast.show}
+        onClose={() => setToast(prev => ({ ...prev, show: false }))}
+        type={toast.type}
+      />
     </section>
   )
 }

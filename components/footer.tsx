@@ -26,8 +26,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/kontak" className="text-card-foreground hover:text-primary transition-colors">
-                  Kontak
+                <Link href="/komunitas" className="text-card-foreground hover:text-primary transition-colors">
+                  Komunitas
                 </Link>
               </li>
             </ul>
